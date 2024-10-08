@@ -65,6 +65,14 @@ class BluetoothViewModel(private val context: Context) : ViewModel() {
     }
 
     @SuppressLint("MissingPermission")
+    fun connectToDevice(device: BluetoothDeviceWithRSSI) {
+        // Implement the logic to connect to the Bluetooth device
+        val bluetoothDevice = device.device
+        // Example: Initiate a connection to the device
+        bluetoothDevice.createBond()
+    }
+
+    @SuppressLint("MissingPermission")
     fun stopBluetoothScan() {
         if (hasPermissions()) {
             bluetoothLeScanner?.stopScan(scanCallback)
