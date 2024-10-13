@@ -20,25 +20,43 @@ import fi.example.parliamentmpapp.viewmodel.CommentsViewModel
 @Composable
 fun MainScreen(mpViewModel: MPViewModel, commentsViewModel: CommentsViewModel) {
     var selectedMP by remember { mutableStateOf<MP?>(null) }
+    var showComments by remember { mutableStateOf(false) }
 
+    // Scaffold provides the basic layout structure
     Scaffold { innerPadding ->
         val modifier = Modifier
             .fillMaxSize()
             .padding(innerPadding)
 
+        // Display the list of MPs or the comments screen based on the selected MP
         if (selectedMP == null) {
             MPListScreen(
                 mpViewModel = mpViewModel,
+                commentsMPViewModel = commentsViewModel,
                 onMPSelected = { mp ->
                     selectedMP = mp
                 }
             )
-        } else {
+
+        } else if (showComments) {
             CommentScreen(
                 selectedMP = selectedMP!!,
-                onBack = { selectedMP = null },
+                onBack = {
+                    showComments = false
+                    selectedMP = null
+                },
+                commentsViewModel = commentsViewModel,
+                modifier = modifier
+            )
+
+        } else {
+            MPDetailScreen(
+                mp = selectedMP!!,
+                onBack = {
+                    selectedMP = null
+                },
+                commentsViewModel = commentsViewModel,
                 modifier = modifier,
-                commentsViewModel = commentsViewModel
             )
         }
     }

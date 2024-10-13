@@ -10,17 +10,22 @@ import androidx.compose.material3.Text
 import fi.example.parliamentmpapp.data.MP
 import fi.example.parliamentmpapp.viewmodel.MPViewModel
 import fi.example.parliamentmpapp.ui.components.MPListItem
+import fi.example.parliamentmpapp.viewmodel.CommentsViewModel
 
 /**
  * Composable function that displays a list of parliament members.
  *
  * The list is populated with data from the MPViewModel and allows selection of an MP item.
  *
- * @author Anish
  * @date Anish - 2112913 - 12/10/2024
  */
 @Composable
-fun MPListScreen(mpViewModel: MPViewModel, onMPSelected: (MP) -> Unit) {
+fun MPListScreen(
+    mpViewModel: MPViewModel,
+    commentsMPViewModel: CommentsViewModel,
+    onMPSelected: (MP) -> Unit
+
+) {
     // Collect the list of MPs as a state
     val mps by mpViewModel.allMPs.collectAsState(initial = emptyList())
     val isLoading by mpViewModel.isLoading.collectAsState(initial = true)

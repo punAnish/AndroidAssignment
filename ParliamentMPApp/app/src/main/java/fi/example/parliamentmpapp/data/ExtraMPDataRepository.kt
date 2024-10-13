@@ -2,6 +2,7 @@ package fi.example.parliamentmpapp.data
 
 import kotlinx.coroutines.flow.Flow
 
+
 /**
  * Repository for managing ExtraMPData operations.
  * It acts as a mediator between the ExtraMPDataDao and the rest of the application.
@@ -19,4 +20,6 @@ class ExtraMPDataRepository(private val extraMPDataDao: ExtraMPDataDao) {
     fun getExtraMPDataById(id: Int): Flow<ExtraMPData?> {
         return extraMPDataDao.getExtraMPDataById(id)
     }
+
+
 }

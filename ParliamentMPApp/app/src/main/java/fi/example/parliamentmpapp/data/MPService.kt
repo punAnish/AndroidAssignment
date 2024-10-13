@@ -13,7 +13,9 @@ interface MPService {
     @GET("seating.json")
     suspend fun getMPs(): List<MP>
 
+
     // Fetch extra MP data from the API
     @GET("extras.json")
     suspend fun getExtraMPData(): List<ExtraMPData>
+
 }

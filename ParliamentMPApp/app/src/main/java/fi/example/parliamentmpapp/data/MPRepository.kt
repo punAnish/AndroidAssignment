@@ -13,7 +13,6 @@ import kotlinx.coroutines.withContext
  */
 class MPRepository (
     private val mpDao: MPDao,
-    private val commentDao: CommentDao,
     private val mpService: MPService = MPServiceImpl.service
 ) {
     // Fetch all MPs from the database as a Flow
@@ -23,10 +22,10 @@ class MPRepository (
     suspend fun loadMPs() {
         // Fetch MPs from the service (API)
         val mpList = withContext(Dispatchers.IO) {
-            mpService.getMPs() // Replace with your actual service call
+            mpService.getMPs()
         }
         // Insert the fetched MPs into the database
-        mpDao.insertAll(mpList) // Ensure you have an insertAll method in your DAO
+        mpDao.insertAll(mpList)
     }
 
     // Insert a new MP into the database
@@ -39,10 +38,11 @@ class MPRepository (
         return mpDao.getCommentsForMP(mpHeketaId)
     }
 
-
     //  method to fetch MP images using Coil
     fun getMPImageUrl(mp: MP): String {
         return "https://avoindata.eduskunta.fi/${mp.pictureUrl}"
     }
+
+
 
 }

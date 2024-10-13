@@ -3,7 +3,6 @@ package fi.example.parliamentmpapp.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-
 /**
  * Represents a member of parliament.
  * @date Anish - 2112913- 12/10/2024

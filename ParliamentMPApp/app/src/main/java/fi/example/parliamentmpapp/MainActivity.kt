@@ -1,7 +1,6 @@
 package fi.example.parliamentmpapp
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -30,7 +29,7 @@ class MainActivity : ComponentActivity() {
         val mpService = MPServiceImpl.service
 
         // Initialize the MPRepository with the correct parameters
-        val mpRepository = MPRepository(db.mpDao(), db.commentDao(), mpService)
+        val mpRepository = MPRepository(db.mpDao(), mpService)
 
         // Initialize the CommentRepository with the correct CommentDao
         val commentRepository = CommentRepository(db.commentDao())
@@ -40,8 +39,11 @@ class MainActivity : ComponentActivity() {
     }
 
     private val commentsViewModel: CommentsViewModel by viewModels {
+        // Get the instance of the database
         val db = AppDatabase.getDatabase(applicationContext)
-        val commentRepository = CommentRepository(db.commentDao()) // Make sure you have a CommentDao
+        // Initialize the CommentRepository with the CommentDao from the database
+        val commentRepository = CommentRepository(db.commentDao())
+        // Return the CommentsViewModelFactory with the initialized CommentRepository
         CommentsViewModelFactory(commentRepository)
     }
 
